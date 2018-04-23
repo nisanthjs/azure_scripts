@@ -2,8 +2,9 @@ java_config=$1
 tomcat_config=$2
 MYSQL_ROOT_PASSWORD=$3
 
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD"
+MYSQL_ROOT_PASSWORD=Ansibleusr@123
+echo "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections 
+echo "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD" | sudo debconf-set-selections 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
 
 # Install Java
